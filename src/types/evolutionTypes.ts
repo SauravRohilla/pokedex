@@ -37,7 +37,9 @@ export interface FlatEvolution {
   name: string;
   minLevel: number | null;
   trigger: string;
-  url : string
+  url: string,
+  isLast: boolean,
+  isFirst: boolean
 }
 
 
@@ -47,6 +49,8 @@ export interface ChainLink {
   species: NamedAPIResource;
   evolution_details: EvolutionDetail[];
   evolves_to: ChainLink[]; // 👈 recursive type
+  isLast: boolean,
+  isFirst: boolean
 }
 
 export interface EvolutionChain {

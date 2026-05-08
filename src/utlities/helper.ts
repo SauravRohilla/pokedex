@@ -88,19 +88,15 @@ export function flattenEvolutionChain(chain: ChainLink | undefined): FlatEvoluti
             name: current.species.name,
             minLevel: current.evolution_details[0]?.min_level ?? null,
             trigger: current.evolution_details[0]?.trigger?.name ?? 'base',
-            url: current.species.url
+            url: current.species.url,
+            isLast: current.evolves_to.length === 0,
+            isFirst: current.evolution_details.length === 0
         });
         current = current.evolves_to[0]; // follow the main chain
     }
     return result;
 }
 
-// Output for bulbasaur chain:
-// [
-//   { name: "bulbasaur", minLevel: null, trigger: "base" },
-//   { name: "ivysaur",   minLevel: 16,   trigger: "level-up" },
-//   { name: "venusaur",  minLevel: 32,   trigger: "level-up" },
-// ]
 
 export function habitatImage(type: string) {
     const src: Record<string, string> = {

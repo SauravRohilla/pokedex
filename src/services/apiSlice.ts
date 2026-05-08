@@ -3,6 +3,7 @@ import type { Pokemon } from "../types/apiDataTypes";
 import type { PokemonSpecies } from "../types/pokemonSpeciesDataTypes";
 import type { AbilityData } from "../types/pokemonAbility";
 import type { EvolutionChain } from "../types/evolutionTypes";
+import type { PokemonHabitat } from "../types/habitatTypes";
 
 const pokedex = createApi({
     reducerPath: "pokeAPI",
@@ -10,7 +11,7 @@ const pokedex = createApi({
         baseUrl: "https://pokeapi.co/api/v2/"
     }),
     endpoints: (builder) => ({
-        getPokemon: builder.query<Pokemon, number>({
+        getPokemon: builder.query<Pokemon, number | string>({
             query: (id) => `/pokemon/${id}`
         }),
         getPokemonSpecies: builder.query<PokemonSpecies, number>({
@@ -21,9 +22,17 @@ const pokedex = createApi({
         }),
         getPokemonEvolution: builder.query<EvolutionChain, number>({
             query: (id) => `/evolution-chain/${id}`
+        }),
+        getHabitat: builder.query<PokemonHabitat, number>({
+            query: (id) => `/pokemon-habitat/${id}`
         })
     })
 })
 
-export const { useGetPokemonQuery, useGetPokemonSpeciesQuery, useGetPokemonAbilitiesQuery, useGetPokemonEvolutionQuery } = pokedex;
+export const { useGetPokemonQuery,
+    useGetPokemonSpeciesQuery,
+    useGetPokemonAbilitiesQuery,
+    useGetPokemonEvolutionQuery,
+    useGetHabitatQuery
+} = pokedex;
 export default pokedex;
