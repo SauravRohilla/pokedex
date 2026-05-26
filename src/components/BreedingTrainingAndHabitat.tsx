@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useRoute } from "preact-iso";
 import { useGetHabitatQuery, useGetPokemonSpeciesQuery } from "../services/apiSlice";
 import SubHeadingH2 from "./SubHeadingH2";
@@ -75,6 +76,19 @@ export default function BreedingTrainingAndHabitat() {
                                         </div>
                                 }
 
+=======
+import SubHeadingH2 from "./SubHeadingH2";
+
+export default function BreedingTrainingAndHabitat() {
+    return (
+        <>
+            <div className="py-12 bg-[#f3f4f6]">
+                <div className="container m-auto">
+                    <div className="flex items-center justify-between">
+                        <div className="w-1/2">
+                            <div className="mb-6">
+                                <SubHeadingH2 name={"Breedin & Training"} fontSize="30px" />
+>>>>>>> origin/main
                             </div>
                         </div>
                     </div>
@@ -82,4 +96,8 @@ export default function BreedingTrainingAndHabitat() {
             </div>
         </>
     )
+<<<<<<< HEAD
 } 
+=======
+}
+>>>>>>> origin/main
