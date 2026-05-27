@@ -1,9 +1,10 @@
-import Header from "../components/Header"
+import Header from '../components/Header'
+import RegionsHeroComponent from '../components/RegionsHeroComponent'
 export default function Regions() {
-    return (
-        <>
-            <Header />
-            <h1>Regions</h1>
-        </>
-    )
+  return (
+    <>
+      <Header />
+      <RegionsHeroComponent />
+    </>
+  )
 }
