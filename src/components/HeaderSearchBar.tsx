@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'preact/hooks'
 import searchIcon from '../assets/images/Container.svg'
-import { handleInput } from '../utlities/helper'
 import type { PokemonListItem, PokemonListResponse } from '../types/searchPokemons'
 
 export default function HeaderSearchBar() {
   const [value, setValue] = useState<string>('')
+  const [debouncedValue, setDebouncedValue] = useState<string>('')
   const [data, setData] = useState<PokemonListResponse>()
-  let items = null
-  if (data) {
-    items = data.results.filter((item) => item.name.toLowerCase().includes(value.toLowerCase()))
-  }
+  const items =
+    data?.results.filter((item) => item.name.toLowerCase().includes(debouncedValue.toLowerCase())) ?? []
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedValue(value)
+    }, 200)
+
+    return () => clearTimeout(timeout)
+  }, [value])
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -17,7 +23,7 @@ export default function HeaderSearchBar() {
       setData(await res.json())
     }
     fetchPokemon()
-  }, [value])
+  }, [])
 
   return (
     <>
@@ -26,7 +32,6 @@ export default function HeaderSearchBar() {
           <img src={searchIcon} alt="Search Icon" />
           <input
             type="text"
-            onKeyPress={(e) => handleInput(e, setValue)}
             onInput={(e) => setValue((e.target as HTMLInputElement).value)}
             value={value}
             id="search-pokemon"
@@ -34,15 +39,13 @@ export default function HeaderSearchBar() {
             placeholder={'Search Pokemon...'}
           />
         </div>
-        {items && items.length > 0 && value !== '' && (
+        {items.length > 0 && debouncedValue !== '' && (
           <ul className={'absolute max-h-30 w-full overflow-scroll bg-white p-2'} id="pokemon-list">
-            {items.map((item: PokemonListItem) => {
-              console.log('Itmes: ', { items })
-
-              console.log({ value })
+            {items.slice(0, 12).map((item: PokemonListItem) => {
+              const pokemonId = item.url.slice(0, -1).split('/').at(-1)
               return (
-                <li onClick={() => setValue('')}>
-                  <a href={item.url.slice(0, -1).split('/').at(-1)} className={'capitalize'}>
+                <li key={item.name} onClick={() => setValue('')}>
+                  <a href={`/pokemon_detail/${pokemonId}`} className={'capitalize'}>
                     {item.name.split('-').join(' ')}
                   </a>
                 </li>

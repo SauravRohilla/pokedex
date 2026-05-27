@@ -2,9 +2,11 @@ import HeroHeading from "./HeroHeading";
 import HeroSubHeading from "./HeroSubHeading";
 import { randomPokemonId } from "../utlities/helper";
 import { useGetPokemonQuery } from "../services/apiSlice";
+import { useMemo } from "preact/hooks";
 
 export default function HeroComponent() {
-    const { data, isLoading } = useGetPokemonQuery(randomPokemonId());
+    const featuredPokemonId = useMemo(() => randomPokemonId(), []);
+    const { data, isLoading } = useGetPokemonQuery(featuredPokemonId);
     return (
         <>
             <div className="pt-16 bg-[#F8f9fb] dark:bg-[#121212]">

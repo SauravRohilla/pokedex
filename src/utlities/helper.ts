@@ -1,7 +1,5 @@
 import { signal } from '@preact/signals'
 import type { ChainLink, FlatEvolution } from '../types/evolutionTypes'
-import type { Dispatch } from '@reduxjs/toolkit'
-import { useGetPokemonQuery } from '../services/apiSlice'
 
 type Theme = 'dark' | 'light'
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -114,13 +112,4 @@ export function habitatImage(type: string) {
     'waters-edge': 'water.png',
   }
   return src[type]
-}
-
-// Funciton to handle Search
-export function handleInput(
-  e: React.KeyboardEvent<HTMLInputElement>,
-  setValue: React.Dispatch<React.SetStateAction<string>>,
-) {
-  if (e.key === 'Enter') console.log('Enter pressed!')
-  setValue(e.currentTarget.value)
 }
