@@ -1,8 +1,6 @@
-// types/region.ts
-
 export interface RegionListItem {
-  name: string // e.g. "kanto", "johto", "hoenn"
-  url: string // e.g. "https://pokeapi.co/api/v2/region/1/"
+  name: string
+  url: string
 }
 
 export interface RegionListResponse {
@@ -15,15 +13,40 @@ export interface RegionListResponse {
 export interface RegionDetail {
   id: number
   name: string
-  locations: RegionListItem[] // locations within this region
+  locations: RegionListItem[]
   main_generation: {
-    name: string // e.g. "generation-i"
+    name: string
     url: string
   }
   names: {
-    name: string // localized name
+    name: string
     language: { name: string; url: string }
   }[]
   pokedexes: { name: string; url: string }[]
   version_groups: { name: string; url: string }[]
+}
+
+export interface RegionProfile {
+  id: number
+  slug: string
+  name: string
+  tagline: string
+  description: string
+  generation: string
+  inspiration: string
+  professor: string
+  starters: string[]
+  legendary: string[]
+  cities: string[]
+  pokemonCount: number
+  notableFeatures: string[]
+  timeline: string[]
+  badges: string[]
+  image: string
+  banner: string
+  colorTheme: {
+    primary: string
+    secondary: string
+    glow: string
+  }
 }
