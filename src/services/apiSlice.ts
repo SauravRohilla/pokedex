@@ -4,7 +4,7 @@ import type { PokemonSpecies } from '../types/pokemonSpeciesDataTypes'
 import type { AbilityData } from '../types/pokemonAbility'
 import type { EvolutionChain } from '../types/evolutionTypes'
 import type { PokemonHabitat } from '../types/habitatTypes'
-import type { RegionDetail } from '../types/regions'
+import type { RegionDetail, RegionListResponse } from '../types/regions'
 
 const pokedex = createApi({
   reducerPath: 'pokeAPI',
@@ -30,6 +30,9 @@ const pokedex = createApi({
     getRegion: builder.query<RegionDetail, number>({
       query: (id) => `/region/${id}`,
     }),
+    getRegions: builder.query<RegionListResponse, number | void>({
+      query: (limit = 50) => `/region?limit=${limit}`,
+    }),
   }),
 })
 
@@ -40,5 +43,6 @@ export const {
   useGetPokemonEvolutionQuery,
   useGetHabitatQuery,
   useGetRegionQuery,
+  useGetRegionsQuery,
 } = pokedex
 export default pokedex
