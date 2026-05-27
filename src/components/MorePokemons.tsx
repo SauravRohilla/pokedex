@@ -8,7 +8,7 @@ export default function MorePokemons() {
             <div className="flex gap-8 flex-wrap items-stretch">
                 {
                     pokemonIds.map((item: number) => {
-                        return < PokemonCard widthOfCard="45%" id={item} />
+                        return <PokemonCard key={item} widthOfCard="45%" id={item} />
                     })
                 }
             </div>
