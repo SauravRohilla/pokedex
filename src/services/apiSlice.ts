@@ -1,29 +1,48 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Pokemon } from "../types/apiDataTypes";
-import type { PokemonSpecies } from "../types/pokemonSpeciesDataTypes";
-import type { AbilityData } from "../types/pokemonAbility";
-import type { EvolutionChain } from "../types/evolutionTypes";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import type { Pokemon } from '../types/apiDataTypes'
+import type { PokemonSpecies } from '../types/pokemonSpeciesDataTypes'
+import type { AbilityData } from '../types/pokemonAbility'
+import type { EvolutionChain } from '../types/evolutionTypes'
+import type { PokemonHabitat } from '../types/habitatTypes'
+import type { RegionDetail, RegionListResponse } from '../types/regions'
 
 const pokedex = createApi({
-    reducerPath: "pokeAPI",
-    baseQuery: fetchBaseQuery({
-        baseUrl: "https://pokeapi.co/api/v2/"
+  reducerPath: 'pokeAPI',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://pokeapi.co/api/v2/',
+  }),
+  endpoints: (builder) => ({
+    getPokemon: builder.query<Pokemon, number | string>({
+      query: (id) => `/pokemon/${id}`,
     }),
-    endpoints: (builder) => ({
-        getPokemon: builder.query<Pokemon, number>({
-            query: (id) => `/pokemon/${id}`
-        }),
-        getPokemonSpecies: builder.query<PokemonSpecies, number>({
-            query: (id) => `/pokemon-species/${id}`
-        }),
-        getPokemonAbilities: builder.query<AbilityData, number>({
-            query: (id) => `/ability/${id}`
-        }),
-        getPokemonEvolution : builder.query<EvolutionChain,number>({
-            query : (id) => `/evolution-chain/${id}`
-        })
-    })
+    getPokemonSpecies: builder.query<PokemonSpecies, number>({
+      query: (id) => `/pokemon-species/${id}`,
+    }),
+    getPokemonAbilities: builder.query<AbilityData, number>({
+      query: (id) => `/ability/${id}`,
+    }),
+    getPokemonEvolution: builder.query<EvolutionChain, number>({
+      query: (id) => `/evolution-chain/${id}`,
+    }),
+    getHabitat: builder.query<PokemonHabitat, number>({
+      query: (id) => `/pokemon-habitat/${id}`,
+    }),
+    getRegion: builder.query<RegionDetail, number>({
+      query: (id) => `/region/${id}`,
+    }),
+    getRegions: builder.query<RegionListResponse, number | void>({
+      query: (limit = 50) => `/region?limit=${limit}`,
+    }),
+  }),
 })
 
-export const { useGetPokemonQuery, useGetPokemonSpeciesQuery, useGetPokemonAbilitiesQuery, useGetPokemonEvolutionQuery } = pokedex;
-export default pokedex;
+export const {
+  useGetPokemonQuery,
+  useGetPokemonSpeciesQuery,
+  useGetPokemonAbilitiesQuery,
+  useGetPokemonEvolutionQuery,
+  useGetHabitatQuery,
+  useGetRegionQuery,
+  useGetRegionsQuery,
+} = pokedex
+export default pokedex

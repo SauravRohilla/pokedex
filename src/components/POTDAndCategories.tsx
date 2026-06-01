@@ -16,7 +16,7 @@ export default function POTDAndCategories() {
                     </div>
                 </div>
                 <div className="container m-auto flex items-center justify-center mt-12">
-                    <Button text={"View Full Catalog →"} link={"#"} bgColor="#191C1D" fontColor={"#F8F9FA"} />
+                    <Button text={"View Full Catalog →"} link={"/catalog"} bgColor="#191C1D" fontColor={"#F8F9FA"} />
                 </div>
             </div>
         </>

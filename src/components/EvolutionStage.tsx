@@ -2,7 +2,7 @@ import { useGetPokemonQuery } from "../services/apiSlice"
 import { typeColorMap } from "../types/apiDataTypes"
 import SubHeadingH4 from "./SubHeadingH4"
 
-export default function EvolutionStage({ name, level, id }: { name: string, level: number, id: number }) {
+export default function EvolutionStage({ isFirst, isLast, name, level, id }: { isFirst: boolean, isLast: boolean, name: string, level: number, id: number }) {
     const { data, isLoading } = useGetPokemonQuery(id)
     const primaryType: string = data?.types.find((item) => item.slot === 1)?.type.name ?? "normal";
     const fontColor = typeColorMap[primaryType];
@@ -20,9 +20,29 @@ export default function EvolutionStage({ name, level, id }: { name: string, leve
                     <div className={`w-24 dark:text${fontColor}!`}>
                         <SubHeadingH4 name={name} fontSize="18px" />
                         {
-                            level ?
-                                <span class={"text-[12px] text-[#94A3B8]"}>LEVEL {level}</span>
-                                : <span class={"text-[12px] text-[#94A3B8]"}>STAGE 1</span>
+                            level ? (
+                                <>
+                                    {isFirst && (
+                                        <span class={"text-[12px] text-[#94A3B8]"}>
+                                            STAGE 1
+                                        </span>
+                                    )}
+
+                                    {!isLast && (
+                                        <span class={"text-[12px] text-[#94A3B8]"}>
+                                            LEVEL {level}
+                                        </span>
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    {isFirst && (
+                                        <span class={"text-[12px] text-[#94A3B8]"}>
+                                            STAGE 1
+                                        </span>
+                                    )}
+                                </>
+                            )
                         }
                     </div>
 

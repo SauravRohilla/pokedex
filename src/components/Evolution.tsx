@@ -18,7 +18,7 @@ export default function Evolution() {
                             evolutions.map((evo, i) => {
                                 return (
                                     <>
-                                        <EvolutionStage key={evo.name} name={evo.name} level={evo.minLevel as unknown as number} id={evo.url.slice(0, -1).split("/").at(-1) as unknown as number} />
+                                        <EvolutionStage isFirst={evo.isFirst} isLast={evo.isLast} key={evo.name} name={evo.name} level={evo.minLevel as unknown as number} id={evo.url.slice(0, -1).split("/").at(-1) as unknown as number} />
                                         {i !== evolutions.length - 1 &&
                                             <div className="flex flex-col items-center">
                                                 <svg class="w-6 h-6 text-gray-400">
