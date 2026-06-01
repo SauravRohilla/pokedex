@@ -7,7 +7,9 @@ export default function HeaderSearchBar() {
   const [debouncedValue, setDebouncedValue] = useState<string>('')
   const [data, setData] = useState<PokemonListResponse>()
   const items =
-    data?.results.filter((item) => item.name.toLowerCase().includes(debouncedValue.toLowerCase())) ?? []
+    data?.results.filter((item) =>
+      item.name.toLowerCase().includes(debouncedValue.toLowerCase()),
+    ) ?? []
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -40,7 +42,10 @@ export default function HeaderSearchBar() {
           />
         </div>
         {items.length > 0 && debouncedValue !== '' && (
-          <ul className={'absolute max-h-30 w-full overflow-scroll bg-white p-2'} id="pokemon-list">
+          <ul
+            className={'absolute z-50 max-h-30 w-full overflow-scroll bg-white p-2'}
+            id="pokemon-list"
+          >
             {items.slice(0, 12).map((item: PokemonListItem) => {
               const pokemonId = item.url.slice(0, -1).split('/').at(-1)
               return (
