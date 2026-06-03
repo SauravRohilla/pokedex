@@ -7,6 +7,8 @@ import Regions from '../pages/Regions'
 import RegionDetail from '../pages/RegionDetail'
 import PokemonDetailed from '../pages/PokemonDetailed'
 import Catalog from '../pages/Catalog'
+import LogIn from '../pages/LogIn'
+import SignUp from '../pages/SignUp'
 
 export default function Routing() {
   return (
@@ -19,6 +21,8 @@ export default function Routing() {
         <Route path="/regions/:slug" component={RegionDetail} />
         <Route path="/pokemon_detail/:id" component={PokemonDetailed} />
         <Route path="/catalog" component={Catalog} />
+        <Route path="/login" component={LogIn} />
+        <Route path="/signup" component={SignUp} />
         <Route default component={NotFound} />
       </Router>
     </LocationProvider>
