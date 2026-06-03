@@ -44,10 +44,14 @@ export default function Catalog() {
       <Header />
       <main className="bg-[#F8f9fb] px-4 py-12 dark:bg-[#121212]">
         <div className="container m-auto">
-          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h1 className="text-4xl font-semibold tracking-tight text-[#0F172A] dark:text-white">Pokémon Catalog</h1>
-              <p className="text-[#64748B] dark:text-[#CBD5E1]">Browse, search and open full specimen data.</p>
+              <h1 className="text-4xl font-semibold tracking-tight text-[#0F172A] dark:text-white">
+                Pokémon Catalog
+              </h1>
+              <p className="text-[#64748B] dark:text-[#CBD5E1]">
+                Browse, search and open full specimen data.
+              </p>
             </div>
             <input
               value={search}
@@ -66,13 +70,15 @@ export default function Catalog() {
 
           {!isLoading && !error && (
             <>
-              <div className="flex flex-wrap gap-6">
+              <div className="flex flex-wrap justify-between gap-6">
                 {pageItems.map((item) => {
                   const id = Number(item.url.slice(0, -1).split('/').at(-1))
-                  return <PokemonCard key={item.name} widthOfCard="31%" id={id} />
+                  return <PokemonCard key={item.name} widthOfCard="32%" id={id} />
                 })}
               </div>
-              {pageItems.length === 0 && <p className="py-16 text-center text-[#64748B]">No matching Pokémon found.</p>}
+              {pageItems.length === 0 && (
+                <p className="py-16 text-center text-[#64748B]">No matching Pokémon found.</p>
+              )}
 
               <div className="mt-10 flex items-center justify-center gap-4">
                 <button
@@ -100,4 +106,3 @@ export default function Catalog() {
     </>
   )
 }
-

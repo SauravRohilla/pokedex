@@ -1,5 +1,6 @@
 import { signal } from '@preact/signals'
 import type { ChainLink, FlatEvolution } from '../types/evolutionTypes'
+import type { Dispatch, StateUpdater } from 'preact/hooks'
 
 type Theme = 'dark' | 'light'
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -112,4 +113,36 @@ export function habitatImage(type: string) {
     'waters-edge': 'water.png',
   }
   return src[type]
+}
+
+// Handle SignUp Input
+export function handleSignUpInput(
+  e: React.ChangeEvent<HTMLInputElement>,
+  setter: Dispatch<StateUpdater<string>>,
+) {
+  setter(e.currentTarget.value)
+}
+
+// Save new user
+export function saveUser(email: string, password: string) {
+  const users = JSON.parse(localStorage.getItem('Users') || '[]')
+  const userExists = users.some((user: { email: string }) => user.email === email)
+  if (!userExists) {
+    users.push({
+      email,
+      password,
+    })
+  } else return false
+  localStorage.setItem('Users', JSON.stringify(users))
+  return true
+}
+
+// Handle Login
+export function logIn(email: string, password: string) {
+  const users = JSON.parse(localStorage.getItem('Users') || '[]')
+  const userExists = users.some(
+    (user: { email: string; password: string }) =>
+      user.email === email && user.password === password,
+  )
+  return userExists ? true : false
 }

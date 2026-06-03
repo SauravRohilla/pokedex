@@ -1,3 +1,4 @@
+import UserIcon from '../assets/IconComponents/UserIcon'
 import BrandLogo from './BrandLogo'
 import HeaderNav from './HeaderNav'
 import HeaderSearchBar from './HeaderSearchBar'
@@ -13,6 +14,7 @@ export default function Header() {
             <HeaderNav />
             <HeaderSearchBar />
             <ThemeDecider />
+            <UserIcon />
           </div>
         </div>
       </header>
