@@ -146,3 +146,21 @@ export function logIn(email: string, password: string) {
   )
   return userExists ? true : false
 }
+
+export type User = {
+  email: string
+  password: string
+}
+// Reset Password
+export function resetPassword(email: string, oldPassword: string, newPassword: string) {
+  if (newPassword.length < 1) return 'Password can not be empty'
+  const users: User[] = JSON.parse(localStorage.getItem('Users') || '[]')
+  const user = users.find((user: { email: string }) => user.email === email)
+  if (!user) return 'No user found'
+  if (user.password !== oldPassword) return 'Wrong Password'
+  else if (user.password === oldPassword) {
+    user.password = newPassword
+    localStorage.setItem('Users', JSON.stringify(users))
+    return 'Password changed successfully'
+  } else return 'Unknown error occured'
+}
