@@ -12,10 +12,11 @@ export default function LogInForm() {
         <h1 className={'mb-12 text-center text-[40px] dark:text-white'}>LogIn</h1>
         <form action="" class={'m-auto flex w-5/12 flex-col gap-10'}>
           <div className="flex flex-col gap-1">
-            <label className={'text-[14px] dark:text-[#BC0100]'} htmlFor="login-email">
+            <label className={'text-[14px] font-bold dark:text-[#BC0100]'} htmlFor="login-email">
               Email
             </label>
             <input
+              required
               id="login-email"
               className={
                 'rounded-[4px] border border-[#c4c4c4] px-2 py-1 outline-0 dark:text-[#c4c4c4]'
@@ -26,10 +27,11 @@ export default function LogInForm() {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className={'text-[14px] dark:text-[#BC0100]'} htmlFor="login-password">
+            <label className={'text-[14px] font-bold dark:text-[#BC0100]'} htmlFor="login-password">
               Password
             </label>
             <input
+              required
               id="login-password"
               className={
                 'rounded-[4px] border border-[#c4c4c4] px-2 py-1 outline-0 dark:text-[#c4c4c4]'
@@ -48,8 +50,17 @@ export default function LogInForm() {
             >
               Sign Up
             </a>
+            <a
+              href={'/reset-password'}
+              className={
+                'cursor-pointer rounded-md bg-gray-200 px-4 py-2 text-gray-800 transition-colors hover:bg-gray-300'
+              }
+            >
+              Reset Password
+            </a>
             <button
               type={'submit'}
+              disabled={email === '' || password === ''}
               className={
                 'cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700'
               }
